@@ -48,11 +48,11 @@ def perform_eda():
 
     plt.subplots(2, 2, figsize=(15, 6))
     plt.subplot(1, 2, 1)  # row 1, col 2 index 1
-    bread_series.plot(label='Цены для {}'.format(bread_series.static_covariates_values()[0, 1],
+    bread_series.plot(label='Продажи для {}'.format(bread_series.static_covariates_values()[0, 1],
                                                  bread_series.static_covariates_values()[0, 0],
                                                  bread_series.static_covariates_values()[0, 2]))
 
-    celebration_series.plot(label='Цены для {}'.format(celebration_series.static_covariates_values()[0, 1],
+    celebration_series.plot(label='Продажи для {}'.format(celebration_series.static_covariates_values()[0, 1],
                                                        celebration_series.static_covariates_values()[0, 0],
                                                        celebration_series.static_covariates_values()[0, 2]))
 
@@ -60,11 +60,11 @@ def perform_eda():
         "Временные ряды для 2 семейств продукции для каждого из 2 магазинов (1-й и 12-й)")
 
     plt.subplot(1, 2, 2)  # index 2
-    bread_series[-365:].plot(label='Ценя для {}'.format(bread_series.static_covariates_values()[0, 1],
+    bread_series[-365:].plot(label='Продажи для {}'.format(bread_series.static_covariates_values()[0, 1],
                                                         bread_series.static_covariates_values()[0, 0],
                                                         bread_series.static_covariates_values()[0, 2]))
 
-    celebration_series[-365:].plot(label='Цены для {}'.format(celebration_series.static_covariates_values()[0, 1],
+    celebration_series[-365:].plot(label='Продажи для {}'.format(celebration_series.static_covariates_values()[0, 1],
                                                               celebration_series.static_covariates_values()[0, 0],
                                                               celebration_series.static_covariates_values()[0, 2]))
 
@@ -121,14 +121,14 @@ def perform_eda():
 
     plt.subplots(2, 2, figsize=(15, 6))
     plt.subplot(1, 2, 1)  # row 1, col 2 index 1
-    bread_series_transformed.plot(label='Цены для {}'.format(bread_series.static_covariates_values()[0, 1],
+    bread_series_transformed.plot(label='Продажи для {}'.format(bread_series.static_covariates_values()[0, 1],
                                                               bread_series.static_covariates_values()[0, 0],
                                                               bread_series.static_covariates_values()[0, 2]))
 
     plt.title("Временные ряды после масштабирования и логарифмического преобразования")
 
     plt.subplot(1, 2, 2)  # index 2
-    bread_series_transformed[-365:].plot(label='Ценя для {}'.format(bread_series.static_covariates_values()[0, 1],
+    bread_series_transformed[-365:].plot(label='Продажи для {}'.format(bread_series.static_covariates_values()[0, 1],
                                                                      bread_series.static_covariates_values()[0, 0],
                                                                      bread_series.static_covariates_values()[0, 2]))
 
@@ -137,7 +137,7 @@ def perform_eda():
 
     plt.subplots(2, 2, figsize=(15, 6))
     plt.subplot(1, 2, 1)  # row 1, col 2 index 1
-    celebration_series_transformed.plot(label='Цены для {}'.format(celebration_series.static_covariates_values()[0, 1],
+    celebration_series_transformed.plot(label='Продажи для {}'.format(celebration_series.static_covariates_values()[0, 1],
                                                                    celebration_series.static_covariates_values()[0, 0],
                                                                    celebration_series.static_covariates_values()[
                                                                        0, 2]))
