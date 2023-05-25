@@ -2,6 +2,8 @@ from tqdm import tqdm
 import pickle
 import pandas as pd
 import streamlit as st
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 from upload import process_data_future_cov, process_data_promo
 
@@ -97,17 +99,33 @@ def get_submission():
     df_forecasts = pd.concat(listofseries)
     df_forecasts.reset_index(drop=True, inplace=True)
 
-    # No Negative Forecasts
+    # Нет отрицательных прогнозов
     df_forecasts[df_forecasts < 0] = 0
     forecasts_kaggle = pd.concat([df_test_sorted, df_forecasts.set_index(df_test_sorted.index)], axis=1)
     forecasts_kaggle_sorted = forecasts_kaggle.sort_values(by=['id'])
-    forecasts_kaggle_sorted = forecasts_kaggle_sorted.drop(['date', 'store_nbr', 'family'], axis=1)
+
     forecasts_kaggle_sorted = forecasts_kaggle_sorted.rename(columns={"fcast": "sales"})
     forecasts_kaggle_sorted = forecasts_kaggle_sorted.reset_index(drop=True)
 
     # Submission
     submission_kaggle = forecasts_kaggle_sorted
     csv = submission_kaggle.to_csv(index=False)
+
+    # Добавление возможности группировки и визуализации данных
+    grouping_options = ['date', 'store_nbr', 'family']
+    selected_grouping = st.selectbox("Выберите категорию для группировки данных:", grouping_options)
+
+    grouped_data = submission_kaggle.groupby(selected_grouping)["sales"].sum().reset_index()
+    st.dataframe(grouped_data)
+
+    fig, ax = plt.subplots()
+    sns.lineplot(data=grouped_data, x=selected_grouping, y="sales", ax=ax)
+    plt.xticks(rotation=45)  # Вращает метки на оси X на 45 градусов
+    st.pyplot(fig)
+
+    # Save forecasts to a CSV file for further use
+    submission_kaggle.to_csv('forecasts.csv', index=False)
+
     st.download_button(
         label="Download sales forecast CSV file",
         data=csv,
